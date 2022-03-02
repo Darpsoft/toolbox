@@ -6,7 +6,6 @@ platform :ios, '11.0'
 # this is for react native config
 ENVFILES = {
   'Debug' => '$(PODS_ROOT)/../../.env.development',
-  'Staging' => '$(PODS_ROOT)/../../.env.staging',
   'Release' => '$(PODS_ROOT)/../../.env.production',
 }
 
