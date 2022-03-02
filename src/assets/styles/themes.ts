@@ -50,7 +50,7 @@ const customBright: ReactNativePaper.ThemeColors = {
   background: "#fff",
   text: "#000",
   surface: "#f1f3f5",
-  onSurface: "#2e3135",
+  primary: "#DE2126",
 };
 
 export const changeTheme = (selectedTheme: boolean): ReactNativePaper.Theme | undefined => {
