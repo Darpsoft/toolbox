@@ -36,7 +36,7 @@ function checkStatus(response: Response) {
  *
  * @return {object}           The response data
  */
-export default function request(url: RequestInfo, options: RequestInit, isJSON = true): Promise<Response> {
+export default function request<T>(url: RequestInfo, options: RequestInit, isJSON = true): Promise<T> {
   return fetch(url, options)
     .then(checkStatus)
     .then(isJSON ? parseJSON : (response) => response.text());
@@ -156,7 +156,7 @@ export function deleteOptions(body: object, method: string = "DELETE"): RequestI
   };
 }
 
-export async function showMessageError(err: Error): Promise<void> {
+export async function showMessageError(err: Error | unknown): Promise<void> {
   // eslint-disable-next-line no-console
   console.log(err);
 }
