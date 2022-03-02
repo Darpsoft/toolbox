@@ -48,10 +48,9 @@ export const Default = (
 const useStyle = (theme: ReactNativePaper.Theme) =>
   StyleSheet.create({
     inputStyle: {
-      backgroundColor: theme.colors.background,
+      backgroundColor: theme.colors.surface,
       borderRadius: 8,
       fontSize: 16,
-      fontFamily: "HelveticaNeueBold",
     },
     inputNativeStyle: {
       paddingTop: 8,
