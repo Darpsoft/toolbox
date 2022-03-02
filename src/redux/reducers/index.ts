@@ -7,7 +7,6 @@ interface IAsyncStorage {
   auth?: IAuthState;
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const reducers = (asyncStorage: IAsyncStorage = {}) => {
   return combineReducers({
     settings,

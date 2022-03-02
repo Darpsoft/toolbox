@@ -69,7 +69,6 @@ const methods = (nameStorage: string) => ({
           break;
         case "array":
           // "Array" significa que va a obtener todo lo que existe y agrega uno nuevo
-          // eslint-disable-next-line no-case-declarations
           const requestValues = await this.get();
           await AsyncStorage.setItem(nameStorage, JSON.stringify([...requestValues, values]));
           break;

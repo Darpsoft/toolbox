@@ -21,7 +21,6 @@ import { storage as database } from "@utils/storage";
 
 const Stack = createNativeStackNavigator();
 
-// eslint-disable-next-line prefer-const
 let firstLoad = {
   auth: true,
 };
