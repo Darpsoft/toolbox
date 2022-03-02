@@ -47,7 +47,7 @@ const customDark: ReactNativePaper.ThemeColors = {
 
 const customBright: ReactNativePaper.ThemeColors = {
   ...DefaultTheme.colors,
-  background: "#f2f2f7",
+  background: "#fff",
   text: "#000",
   surface: "#f1f3f5",
   onSurface: "#2e3135",

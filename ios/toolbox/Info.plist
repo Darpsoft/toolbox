@@ -40,6 +40,11 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Feather.ttf</string>
+		<string>RobotoBlack.ttf</string>
+		<string>RobotoBold.ttf</string>
+		<string>RobotoLight.ttf</string>
+		<string>RobotoMedium.ttf</string>
+		<string>RobotoRegular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

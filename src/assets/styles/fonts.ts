@@ -3,39 +3,39 @@ import { Platform } from "react-native";
 const fontConfig: any = {
   ios: {
     regular: {
-      fontFamily: "System",
+      fontFamily: "RobotoRegular",
     },
     medium: {
-      fontFamily: "System",
+      fontFamily: "RobotoMedium",
     },
     light: {
-      fontFamily: "System",
+      fontFamily: "RobotoLight",
     },
     thin: {
-      fontFamily: "System",
+      fontFamily: "RobotoRegular",
     },
   },
   android: {
     light: {
-      fontFamily: "Roboto-Light",
+      fontFamily: "RobotoLight",
     },
     regular: {
-      fontFamily: "Roboto-Regular",
+      fontFamily: "RobotoRegular",
     },
     medium: {
-      fontFamily: "Roboto-Medium",
+      fontFamily: "RobotoMedium",
     },
     bold: {
-      fontFamily: "Roboto-Bold",
+      fontFamily: "RobotoBold",
     },
     boldItalic: {
-      fontFamily: "Roboto-BoldItalic",
+      fontFamily: "RobotoBoldItalic",
     },
     black: {
-      fontFamily: "Roboto-Black",
+      fontFamily: "RobotoBlack",
     },
     blackItalic: {
-      fontFamily: "Roboto-BlackItalic",
+      fontFamily: "RobotoBlackItalic",
     },
   },
 };
