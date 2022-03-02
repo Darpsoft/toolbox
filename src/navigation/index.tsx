@@ -18,8 +18,17 @@ import { useSelector } from "react-redux";
 
 // Utils
 import { storage as database } from "@utils/storage";
+import { useTheme } from "react-native-paper";
+import AlertApp from "@components/AlertApp";
+import LoaderApp from "@components/LoaderApp";
+import _ from "lodash";
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  Login: undefined;
+  Home: undefined;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 let firstLoad = {
   auth: true,
@@ -45,22 +54,42 @@ const PersistReducer = () => {
 
   return <View />;
 };
+const memoizationAuth = (left: RootState["auth"], rigth: RootState["auth"]) => _.isEqual(left.tokenUser, rigth.tokenUser);
 
 const MainStack = () => {
+  const auth = useSelector(({ auth }: RootState) => auth, memoizationAuth);
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Home" component={Home} />
+      {auth?.tokenUser === null ? (
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+      ) : (
+        <Stack.Screen name="Home" component={Home} />
+      )}
     </Stack.Navigator>
   );
 };
 
 const AppCreate = () => {
+  const theme = useTheme();
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
+      <NavigationContainer
+        theme={{
+          dark: theme.dark,
+          colors: {
+            primary: theme.colors.primary,
+            background: theme.colors.background,
+            card: theme.colors.surface,
+            text: theme.colors.text,
+            border: theme.colors.backdrop,
+            notification: theme.colors.notification,
+          },
+        }}
+      >
         <MainStack />
         <PersistReducer />
+        <AlertApp />
+        <LoaderApp />
       </NavigationContainer>
     </SafeAreaProvider>
   );
