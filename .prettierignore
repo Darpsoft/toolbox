@@ -1,0 +1,9 @@
+.next
+node_modules
+public
+__tests__
+android
+ios
+
+src/assets/svg
+CHANGELOG.md
