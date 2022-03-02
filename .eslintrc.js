@@ -1,7 +1,7 @@
 const RULES = {
   OFF: "off",
   WARN: "warn",
-  ERROR: "errro",
+  ERROR: "error",
 };
 
 module.exports = {
