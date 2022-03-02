@@ -7,7 +7,12 @@ import { storage as database } from "./src/utils/storage";
 import _ from "lodash";
 import { useReducerCustom } from "./src/hooks/useReducerCustom";
 import SplashScreen from "./src/components/SplashScreen";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
+import { Provider as PaperProvider, useTheme } from "react-native-paper";
+import { StatusBar } from "react-native";
+import { RootState } from "@redux/reducers";
+import { changeTheme } from "@assets/styles/themes";
+import IconFeather from "react-native-vector-icons/Feather";
 
 export let storage: Store;
 
@@ -17,6 +22,22 @@ export const getStorageAsync = async (): Promise<{ auth?: IAuthState }> => {
   return {
     ...(_.isEqual(auth, {}) ? {} : { auth }),
   };
+};
+
+const memoizationSetting = (left: RootState["settings"], rigth: RootState["settings"]) => _.isEqual(left.theme, rigth.theme);
+
+const WithPaper = () => {
+  const settings = useSelector(({ settings }: RootState) => settings, memoizationSetting);
+  const theme = useTheme();
+
+  return (
+    <>
+      <StatusBar backgroundColor={theme.colors.background} animated barStyle={theme.dark ? "light-content" : "dark-content"} />
+      <PaperProvider theme={changeTheme(settings.theme)} settings={{ icon: (props) => <IconFeather {...props} /> }}>
+        <AppCreate />
+      </PaperProvider>
+    </>
+  );
 };
 
 const initialState = {
@@ -46,7 +67,7 @@ const App = () => {
 
   return (
     <Provider store={storage}>
-      <AppCreate />
+      <WithPaper />
     </Provider>
   );
 };
