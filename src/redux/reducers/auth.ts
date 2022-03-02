@@ -1,5 +1,10 @@
-import { users } from "seacare-schemas";
 import { LOGIN_SUCCESS, SIGNOUT_SUCCESS, UPDATE_USER_SUCCESS } from "../constants";
+
+export interface users {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
 
 export interface IAuthState {
   tokenUser: null | string;

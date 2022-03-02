@@ -2,6 +2,8 @@ import { combineReducers } from "redux";
 import { isEqual } from "lodash";
 import auth, { IAuthState, TAuthAction } from "./auth";
 import settings from "./settings";
+import alert from "./alert";
+import loader from "./loader";
 
 interface IAsyncStorage {
   auth?: IAuthState;
@@ -10,6 +12,8 @@ interface IAsyncStorage {
 const reducers = (asyncStorage: IAsyncStorage = {}) => {
   return combineReducers({
     settings,
+    alert,
+    loader,
     auth: (stateReducer: IAuthState | undefined, actions: TAuthAction): IAuthState => {
       const state = stateReducer ?? asyncStorage?.auth;
       return auth(isEqual(state, {}) ? undefined : state, actions);

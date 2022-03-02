@@ -1,4 +1,3 @@
-import { users } from "seacare-schemas";
 import {
   LOGIN_START,
   LOGIN_SUCCESS,
@@ -9,7 +8,7 @@ import {
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
 } from "../constants";
-import { TAuthAction, IAuthState } from "../reducers/auth";
+import { TAuthAction, IAuthState, users } from "../reducers/auth";
 
 export const loginStart = (payload: undefined): any => ({
   type: LOGIN_START,
@@ -20,13 +19,12 @@ export const loginSuccess = (payload: IAuthState): TAuthAction => ({
   payload,
 });
 
-export const signoutStart = (payload: undefined): any => ({
+export const signoutStart = (payload: any): any => ({
   type: SIGNOUT_START,
   payload,
 });
-export const signoutSuccess = (payload?: any): any => ({
+export const signoutSuccess = (): TAuthAction => ({
   type: SIGNOUT_SUCCESS,
-  payload,
 });
 
 export const registerStart = (payload: undefined): any => ({
