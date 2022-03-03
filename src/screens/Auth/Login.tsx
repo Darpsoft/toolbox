@@ -61,7 +61,7 @@ const Login: React.FC<Props> = () => {
   const dispatch = useDispatch();
 
   const handlerRegister = (values: any) => {
-    dispatch(loginStart({ ...values, sub: "ToolboxMobileTest" }));
+    dispatch(loginStart(values));
   };
 
   useFocusEffect(() => {
