@@ -42,7 +42,6 @@ const WithPaper = () => {
 
 const initialState = {
   loading: true,
-  reducers: {},
 };
 
 const App = () => {
@@ -51,15 +50,16 @@ const App = () => {
   const initialRequest = async () => {
     (!state.loading || !storage) && dispatchComponent({ loading: true });
     const reducers = await getStorageAsync();
-    dispatchComponent({ loading: false, reducers });
+
+    // This is for add all reducers in variable storage
+    storage = reduxStorage(reducers);
+
+    dispatchComponent({ loading: false });
   };
 
   React.useEffect(() => {
     initialRequest();
   }, []);
-
-  // This is for add all reducers in variable storage
-  storage = reduxStorage(state.reducers);
 
   if (state.loading) {
     return <SplashScreen />;
