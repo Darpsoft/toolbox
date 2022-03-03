@@ -4,7 +4,7 @@ import auth, { IAuthState, TAuthAction } from "./auth";
 import settings from "./settings";
 import alert from "./alert";
 import loader from "./loader";
-import carrousel from "./carrousel";
+import carousel from "./carousel";
 
 interface IAsyncStorage {
   auth?: IAuthState;
@@ -15,7 +15,7 @@ const reducers = (asyncStorage: IAsyncStorage = {}) => {
     settings,
     alert,
     loader,
-    carrousel,
+    carousel,
     auth: (stateReducer: IAuthState | undefined, actions: TAuthAction): IAuthState => {
       const state = stateReducer ?? asyncStorage?.auth;
       return auth(isEqual(state, {}) ? undefined : state, actions);

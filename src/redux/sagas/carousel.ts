@@ -11,19 +11,19 @@ import {
 } from "redux-saga/effects";
 import request, { getOptions, showMessageError } from "@utils/request";
 
-import { REFRESH_TOKEN_SUCCESS, REQUEST_CARROUSEL_START } from "@redux/constants";
+import { REFRESH_TOKEN_SUCCESS, REQUEST_CAROUSEL_START } from "@redux/constants";
 import Config from "react-native-config";
-import { IResponseCarrousel, TCarrouselAction } from "@redux/reducers/carrousel";
+import { IResponseCarousel, TCarouselAction } from "@redux/reducers/carousel";
 import { delay } from "@utils/utils";
-import { hideLoaderCarrouselSuccess, requestCarrouselSuccess, showLoaderCarrouselSuccess } from "@redux/actions/carrousel";
+import { hideLoaderCarouselSuccess, requestCarouselSuccess, showLoaderCarouselSuccess } from "@redux/actions/carousel";
 import { TReturnFunctionInstanceLogin } from "./auth";
 import { RootState } from "@redux/reducers";
 import { refreshTokenStart } from "@redux/actions";
 import { TAuthAction } from "@redux/reducers/auth";
 
-type TReturnFunctionInstanceRequestCarrousel = Generator<
+type TReturnFunctionInstanceRequestCarousel = Generator<
   | SimpleEffect<"CALL", CallEffectDescriptor<unknown>>
-  | PutEffect<TCarrouselAction>
+  | PutEffect<TCarouselAction>
   | PutEffect<TAuthAction>
   | undefined
   | Promise<void>
@@ -31,12 +31,12 @@ type TReturnFunctionInstanceRequestCarrousel = Generator<
   | SimpleEffect<"TAKE", TakeEffectDescriptor>
   | SimpleEffect<"SELECT", SelectEffectDescriptor>,
   void,
-  Response & IResponseCarrousel[] & RootState
+  Response & IResponseCarousel[] & RootState
 >;
 
-export function* RequestCarrousel({ payload }: any): TReturnFunctionInstanceRequestCarrousel {
+export function* RequestCarousel({ payload }: any): TReturnFunctionInstanceRequestCarousel {
   try {
-    yield put(showLoaderCarrouselSuccess());
+    yield put(showLoaderCarouselSuccess());
     yield put(refreshTokenStart());
 
     while (true) {
@@ -44,17 +44,17 @@ export function* RequestCarrousel({ payload }: any): TReturnFunctionInstanceRequ
 
       const url = `${Config.URL_API}/v1/mobile/data`;
       const options = getOptions(payload);
-      const requestCarrousel: IResponseCarrousel[] = yield call(request, url, options);
+      const requestCarousel: IResponseCarousel[] = yield call(request, url, options);
 
-      yield put(requestCarrouselSuccess({ data: requestCarrousel }));
+      yield put(requestCarouselSuccess({ data: requestCarousel }));
     }
   } catch (err) {
     yield showMessageError(err);
     yield delay(1000);
-    yield put(hideLoaderCarrouselSuccess());
+    yield put(hideLoaderCarouselSuccess());
   }
 }
 
-export default function* carrouselSaga(): any {
-  yield takeLatest(REQUEST_CARROUSEL_START, RequestCarrousel);
+export default function* carouselSaga(): any {
+  yield takeLatest(REQUEST_CAROUSEL_START, RequestCarousel);
 }

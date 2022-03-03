@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { signoutSuccess } from "@redux/actions";
 import { useLoader } from "@hooks/useLoader";
 import { RootState } from "@redux/reducers";
-import { requestCarrouselStart } from "@redux/actions/carrousel";
-import Carrousel from "@components/Carrousel";
+import { requestCarouselStart } from "@redux/actions/carousel";
+import Carousel from "@components/HorizontalCarousel";
 import useSafeAreaCustom from "@hooks/useSafeArea";
 
 const { height } = Dimensions.get("window");
@@ -25,7 +25,7 @@ type Props = {
 
 const Home: React.FC<Props> = ({ navigation }) => {
   const theme = useTheme();
-  const { data, loading } = useSelector((state: RootState) => state.carrousel);
+  const { data, loading } = useSelector((state: RootState) => state.carousel);
   const [navigationHeader] = useNavigationCustom();
   const [showLoaderComponent] = useLoader();
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ const Home: React.FC<Props> = ({ navigation }) => {
   }, []);
 
   const initialRequest = () => {
-    dispatch(requestCarrouselStart());
+    dispatch(requestCarouselStart());
   };
 
   React.useLayoutEffect(() => {
@@ -63,7 +63,8 @@ const Home: React.FC<Props> = ({ navigation }) => {
       <FlatList
         refreshControl={<RefreshControl colors={[theme.colors.accent]} refreshing={loading} onRefresh={initialRequest} />}
         data={data}
-        renderItem={(props) => <Carrousel key={props.index} {...props.item} />}
+        keyExtractor={({ title }) => title}
+        renderItem={(props) => <Carousel {...props.item} />}
         snapToInterval={height - headerHeight}
         snapToAlignment={"center"}
         decelerationRate="normal"
