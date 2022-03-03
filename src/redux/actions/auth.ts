@@ -1,6 +1,8 @@
 import {
   LOGIN_START,
   LOGIN_SUCCESS,
+  REFRESH_TOKEN_START,
+  REFRESH_TOKEN_SUCCESS,
   REGISTER_START,
   REGISTER_SUCCESS,
   SIGNOUT_START,
@@ -8,13 +10,13 @@ import {
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
 } from "../constants";
-import { TAuthAction, IAuthState, users } from "../reducers/auth";
+import { TAuthAction, users, IAuthAction } from "../reducers/auth";
 
-export const loginStart = (payload: undefined): any => ({
+export const loginStart = (payload: IAuthAction["LOGIN_START"]["payload"]): TAuthAction => ({
   type: LOGIN_START,
   payload,
 });
-export const loginSuccess = (payload: IAuthState): TAuthAction => ({
+export const loginSuccess = (payload: IAuthAction["LOGIN_SUCCESS"]["payload"]): TAuthAction => ({
   type: LOGIN_SUCCESS,
   payload,
 });
@@ -42,5 +44,13 @@ export const updateUserStart = (payload: users): any => ({
 });
 export const updateUserSuccess = (payload: users): TAuthAction => ({
   type: UPDATE_USER_SUCCESS,
+  payload,
+});
+
+export const refreshTokenStart = (): TAuthAction => ({
+  type: REFRESH_TOKEN_START,
+});
+export const refreshTokenSuccess = (payload: IAuthAction["REFRESH_TOKEN_SUCCESS"]["payload"]): TAuthAction => ({
+  type: REFRESH_TOKEN_SUCCESS,
   payload,
 });
