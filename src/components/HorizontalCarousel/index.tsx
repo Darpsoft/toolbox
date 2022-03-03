@@ -13,7 +13,7 @@ const isIOS = Platform.OS === "ios";
 
 const getDimensions = (type: "poster" | "thumb") => {
   const dimensions = {
-    poster: { width: width * 0.9, height: width * 1.3 },
+    poster: { width: width * 0.9, height: width * 1.2 },
     thumb: { width: width * 0.9, height: width * 0.7 },
   };
   return dimensions[type];
@@ -37,7 +37,9 @@ const CarouselItem: React.FC<Item & { type: "poster" | "thumb" }> = (items) => {
     <View>
       <View style={styles.container}>
         <TouchableOpacity activeOpacity={1} onPress={() => showVideo(items.videoUrl)} style={[dimensions, styles.containerMultimedia]}>
-          {video && <VideoApp style={styles.imageBackground} source={{ uri: items.videoUrl }} resizeMode="cover" />}
+          {video && <VideoApp style={styles.imageBackground} source={{ uri: items.videoUrl }} resizeMode="contain" />}
+          {/* You can also work with resizeMode="contain" in image, it would be a 
+          simple solution but in this case something more complex was implemented. */}
           {!video && <ImageApp style={styles.imageBackground} source={{ uri: items.imageUrl }} resizeMode="cover" />}
         </TouchableOpacity>
       </View>

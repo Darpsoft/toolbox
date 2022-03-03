@@ -10,7 +10,7 @@ import { signoutSuccess } from "@redux/actions";
 import { useLoader } from "@hooks/useLoader";
 import { RootState } from "@redux/reducers";
 import { requestCarouselStart } from "@redux/actions/carousel";
-import Carousel from "@components/HorizontalCarousel";
+import HorizontalCarousel from "@components/HorizontalCarousel";
 import useSafeAreaCustom from "@hooks/useSafeArea";
 
 const { height } = Dimensions.get("window");
@@ -64,10 +64,11 @@ const Home: React.FC<Props> = ({ navigation }) => {
         refreshControl={<RefreshControl colors={[theme.colors.accent]} refreshing={loading} onRefresh={initialRequest} />}
         data={data}
         keyExtractor={({ title }) => title}
-        renderItem={(props) => <Carousel {...props.item} />}
+        renderItem={(props) => <HorizontalCarousel {...props.item} />}
         snapToInterval={height - headerHeight}
         snapToAlignment={"center"}
         decelerationRate="normal"
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

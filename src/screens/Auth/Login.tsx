@@ -22,7 +22,7 @@ const getInputsForm = (): IFormInput[] => {
       status: true,
       placeholder: "Email",
       name: "email",
-      defaultValue: "pedro@vantageio.com",
+      defaultValue: "pedro@toolbox.com",
       icon: "user",
       rules: { required: { value: true, message: "Required" } },
       keyboardType: "email-address",
