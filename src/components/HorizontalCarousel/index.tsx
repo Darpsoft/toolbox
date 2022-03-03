@@ -28,6 +28,7 @@ const CarouselItem: React.FC<Item & { type: "poster" | "thumb" }> = (items) => {
   const dimensions = getDimensions(items.type);
 
   const showVideo = (videoUrl?: string) => {
+    if (video) return setVideo(undefined);
     videoUrl && setVideo(videoUrl);
     !videoUrl && Alert.alert("video not available");
   };
