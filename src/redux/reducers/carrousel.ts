@@ -3,13 +3,13 @@ import { HIDE_LOADER_CARROUSEL_SUCCESS, REQUEST_CARROUSEL_SUCCESS, SHOW_LOADER_C
 export interface Item {
   title: string;
   imageUrl: string;
-  videoUrl: string;
+  videoUrl?: string;
   description: string;
 }
 
 export interface IResponseCarrousel {
   title: string;
-  type: string;
+  type: "poster" | "thumb";
   items: Item[];
 }
 
