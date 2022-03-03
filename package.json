@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint . --fix",
     "reverse": "adb -s a4d0d4c50410 reverse tcp:8081 tcp:8081",
+    "build": "react-native run-android --variant=release",
     "prettier": "prettier . --write --config ./.prettierrc.js",
     "clean": "cd android && ./gradlew clean && cd ..",
     "type-check": "tsc -p tsconfig.json --noEmit",
