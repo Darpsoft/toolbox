@@ -1,5 +1,8 @@
 // This is for access to storage
+import { signoutSuccess } from "@redux/actions";
 import "@redux/index";
+import { RootState } from "@redux/reducers";
+import { storage } from "../../App";
 
 /**
  * Parses the JSON returned by a network request
@@ -22,6 +25,11 @@ function parseJSON(response: Response) {
 function checkStatus(response: Response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
+  }
+
+  if (response.status === 401) {
+    storage.dispatch(signoutSuccess());
+    throw new Error("Unauthorized access");
   }
 
   const error = new Error(response.statusText);
@@ -53,24 +61,13 @@ export function getOptionsWithoutToken(method = "GET"): object {
 }
 
 export function getOptions(method = "GET"): RequestInit {
-  // const { user } = storage.getState((store) => store);
+  const { auth }: RootState = storage.getState();
   return {
     method,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      // Authorization: `Bearer ${user?.token}`,
-    },
-  };
-}
-
-export function getOptionsWithToken(token: string = "", method: string = "GET"): RequestInit {
-  return {
-    method,
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: auth.tokenUser ?? "",
     },
   };
 }
@@ -87,70 +84,50 @@ export function postOptionsWithoutToken(body: object = {}, method: string = "POS
 }
 
 export function postOptions(body: object = {}, method: string = "POST"): RequestInit {
-  // const { user } = storage.getState((store) => store);
+  const { auth }: RootState = storage.getState();
   return {
     method,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      // Authorization: `Bearer ${user?.token}`,
-    },
-    body: JSON.stringify(body),
-  };
-}
-
-export function postOptionsWithAuthorization({
-  authorization,
-  body,
-  method = "POST",
-}: {
-  authorization: string;
-  body: object;
-  method?: string;
-}): RequestInit {
-  return {
-    method,
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: authorization,
+      Authorization: auth.tokenUser ?? "",
     },
     body: JSON.stringify(body),
   };
 }
 
 export function putOptions(body: object = {}, method: string = "PUT"): RequestInit {
-  // const { user } = storage.getState((store) => store);
+  const { auth }: RootState = storage.getState();
   return {
     method,
     headers: {
       Accept: "application/json",
-      // Authorization: `Bearer ${user.token}`,
+      Authorization: auth.tokenUser ?? "",
     },
     body: JSON.stringify(body),
   };
 }
 
 export function patchOptions(body: object = {}, method: string = "PATCH"): RequestInit {
-  // const { user } = storage.getState((store) => store);
+  const { auth }: RootState = storage.getState();
   return {
     method,
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      // Authorization: `Bearer ${user.token}`,
+      Authorization: auth.tokenUser ?? "",
     },
     body: JSON.stringify(body),
   };
 }
 
 export function deleteOptions(body: object, method: string = "DELETE"): RequestInit {
-  // const { user } = storage.getState((store) => store);
+  const { auth }: RootState = storage.getState();
   return {
     method,
     headers: {
       Accept: "application/json",
-      // Authorization: `Bearer ${user.token}`,
+      Authorization: auth.tokenUser ?? "",
     },
     body: JSON.stringify(body),
   };
